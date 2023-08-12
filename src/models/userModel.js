@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { UserRole, UserGender } = require("../constants/type");
-const { ROLE, ROLES } = require("../constants/commons");
+const { ROLE, ROLES, STATUSES, STATUS } = require("../constants/commons");
 //tạo bảng user gồm các field : name,email,password,
 const Schema = mongoose.Schema;
 const userSchema = new mongoose.Schema(
@@ -78,7 +78,11 @@ const userSchema = new mongoose.Schema(
     },
     coverImage: String,
     coverImagePublicId: String,
-    order: [],
+    status: {
+      type: String,
+      enum: STATUSES,
+      default: STATUS.ACTIVE,
+    },
   },
   {
     timestamps: true,
