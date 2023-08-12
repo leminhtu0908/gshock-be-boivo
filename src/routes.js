@@ -21,12 +21,12 @@ router.post("/reset-password", AuthController.resetPassword);
  *User
  */
 router.put(
-  "users1/:id",
+  "/users1/:id",
   multerUpload.single("image"),
   UserController.updateUser
 );
-router.get("users1/search", checkIfAdmin, UserController.listPaginate);
-router.get("users1/find-user-by-id", UserController.getUserById);
+router.get("/users1/search", checkIfAdmin, UserController.listPaginate);
+router.get("/users1/find-user-by-id", UserController.getUserById);
 /*
  * Danh mục
  */
