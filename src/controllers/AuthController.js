@@ -67,7 +67,7 @@ const AuthController = {
     }
     const passwordHash = await bcrypt.hash(password, 10);
     //create user
-    const user = await createUser(fullName, email, passwordHash);
+    const user = await createUser(name, email, passwordHash);
     const token = jwt.sign(
       { user: { userId: user._id, email } },
       process.env.SECRET,
@@ -77,7 +77,7 @@ const AuthController = {
     if (isEmailVerificationRequired) {
       try {
         const template = await getEmailTemplate({
-          greeting: `Hey ${fullName}`,
+          greeting: `Hey ${name}`,
           description: `Thank you for signing up. To complete your registration, please confirm your email.`,
           ctaLink: `${req.headers.origin}/email-verify?email=${email}&token=${token}`,
           ctaText: "Confirm email",
@@ -110,7 +110,12 @@ const AuthController = {
             const token = jwt.sign({ user: body }, process.env.SECRET);
             res
               .cookie("token", token)
-              .send({ user, token, message: "Đăng kí thành công" });
+              .send({
+                user,
+                token,
+                token: { accessToken: token },
+                message: "Đăng kí thành công",
+              });
             handler(req, res, next);
           }
         );
