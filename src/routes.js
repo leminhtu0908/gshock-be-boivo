@@ -12,7 +12,7 @@ router.get("/", (req, res) => res.send("Hello API Ecommerce"));
  * Authentication
  */
 router.post("/signup", AuthController.signUp);
-router.post("/login", AuthController.login);
+router.post("/auth/login", AuthController.login);
 router.post("/logout", AuthController.logout);
 router.post("/forgot-password", AuthController.forgotPassword);
 router.post("/reset-password", AuthController.resetPassword);
