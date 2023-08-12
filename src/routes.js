@@ -69,11 +69,7 @@ router.get("/color/all", ColorController.getAllColor);
  */
 
 router.post("/order", checkIfAdmin, OrdersController.create);
-router.delete(
-  "/order/deleteorder/:id",
-  checkIfAdmin,
-  OrdersController.xoaDonHangUser
-);
+router.put("/order/deleteorder/:id", OrdersController.xoaDonHangUser);
 router.put(
   "/order/duyetDonHang/:id",
   checkIfAdmin,
