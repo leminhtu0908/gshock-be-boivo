@@ -1,6 +1,6 @@
 const multer = require("multer");
 const AuthController = require("./controllers/AuthController");
-const { checkIfAdmin } = require("./utils/projectedRoute");
+const { checkIfAdmin, checkIfUser } = require("./utils/projectedRoute");
 const { DanhMucController } = require("./controllers/danhmuc.controller");
 const { UserController } = require("./controllers/user.controller");
 const { BannerController } = require("./controllers/banner.controller");
@@ -68,7 +68,7 @@ router.get("/color/all", ColorController.getAllColor);
  * Order
  */
 
-router.post("/order", checkIfAdmin, OrdersController.create);
+router.post("/order", checkIfUser, OrdersController.create);
 router.put("/order/deleteorder/:id", OrdersController.xoaDonHangUser);
 router.put(
   "/order/duyetDonHang/:id",
