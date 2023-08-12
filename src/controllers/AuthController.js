@@ -33,8 +33,8 @@ const AuthController = {
   // },
   signUp: async (req, res, next) => {
     //body truyền xuống
-    const { fullName, email, password } = req.body;
-    if (!fullName || !email || !password) {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
       return res
         .status(ErrorCodes.Bad_Request)
         .send("Vui lòng nhập đầy đủ các trường");
@@ -144,9 +144,14 @@ const AuthController = {
           const body = { _id: user._id, email: user.email };
           const token = jwt.sign({ user: body }, process.env.SECRET);
           const authUser = await getAuthUser(user._id);
-          return res
-            .cookie("token", token)
-            .send({ user: authUser, token, message: "Đăng nhập thành công" });
+          return res.cookie("token", token).send({
+            user: authUser,
+            token,
+            token: {
+              accessToken: token,
+            },
+            message: "Đăng nhập thành công",
+          });
         });
       } catch (error) {
         return next(error);

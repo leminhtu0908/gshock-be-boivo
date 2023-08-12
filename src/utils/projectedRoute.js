@@ -1,6 +1,7 @@
 const ErrorCodes = require("../constants/errorCodes");
 const passport = require("passport");
 const { UserRole } = require("../constants/type");
+const { ROLE } = require("../constants/commons");
 
 const checkIfUser = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, (err, user) => {
@@ -26,7 +27,7 @@ const checkIfAdmin = (req, res, next) => {
     if (!user) {
       return res.status(ErrorCodes.Un_Authorized).send("Not authorized.");
     }
-    const isAdmin = user.role === UserRole.Admin;
+    const isAdmin = user.role === ROLE.ADMIN;
 
     if (!isAdmin) {
       return res
