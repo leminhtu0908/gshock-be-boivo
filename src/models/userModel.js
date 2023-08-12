@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 const { UserRole, UserGender } = require("../constants/type");
+const { ROLE, ROLES } = require("../constants/commons");
 //tạo bảng user gồm các field : name,email,password,
 const Schema = mongoose.Schema;
 const userSchema = new mongoose.Schema(
   {
     role: {
       type: String,
-      required: true,
-      default: UserRole.User,
+      enum: ROLES,
+      default: ROLE.USER,
     },
     email: {
       type: String,
@@ -20,6 +21,14 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    firstName: {
+      type: String,
+      // required: true,
+    },
+    lastName: {
+      type: String,
+      // required: true,
+    },
     password: {
       type: String,
       required: true,
@@ -27,6 +36,12 @@ const userSchema = new mongoose.Schema(
     fullName: {
       type: String,
       required: true,
+      trim: true,
+    },
+    name: {
+      type: String,
+      maxlength: 128,
+      index: true,
       trim: true,
     },
     dateofbirth: {
