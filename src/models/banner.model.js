@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { STATUSES, STATUS } = require('../../constants/commons');
+const mongoose = require("mongoose");
+const { STATUSES, STATUS } = require("../constants/commons");
 
 const Schema = mongoose.Schema;
 
@@ -23,5 +23,5 @@ const bannerSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const Banner = mongoose.model('Banner', bannerSchema);
+const Banner = mongoose.model("Banner", bannerSchema);
 module.exports = Banner;
